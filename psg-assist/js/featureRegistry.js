@@ -5,6 +5,7 @@
  */
 
 const removeBackground = require("./features/removeBackground.js");
+const textShadow = require("./features/textShadow.js");
 
 const CATEGORIES = [
   {
@@ -19,7 +20,7 @@ const CATEGORIES = [
     id: "text",
     label: "텍스트",
     features: [
-      { id: "text-shadow", label: "텍스트에 그림자 넣기", impl: null },
+      { id: "text-shadow", label: textShadow.meta.label, impl: textShadow },
       { id: "text-outline", label: "텍스트에 외곽선 넣기", impl: null }
     ]
   },
