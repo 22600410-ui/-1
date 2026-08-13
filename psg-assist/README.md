@@ -15,13 +15,15 @@
 | 카테고리 | 기능 | 상태 |
 | --- | --- | --- |
 | 배경 / 오브젝트 | 배경 제거 | ✅ 가이드 + 자동 실행 구현 완료 |
-| 배경 / 오브젝트 | 오브젝트 복제 | ⏳ 준비 중 |
+| 배경 / 오브젝트 | 오브젝트 복제 | ✅ 가이드 + 자동 실행 구현 완료 |
 | 텍스트 | 텍스트에 그림자 넣기 | ✅ 가이드 + 자동 실행 구현 완료 |
-| 텍스트 | 텍스트에 외곽선 넣기 | ⏳ 준비 중 |
-| 색상 / 보정 | 자동 색상 보정 / 밝기·대비 조정 | ⏳ 준비 중 |
-| 레이어 정리 | 레이어 그룹화 / 이름 정리 | ⏳ 준비 중 |
+| 텍스트 | 텍스트에 외곽선 넣기 | ✅ 가이드 + 자동 실행 구현 완료 |
+| 색상 / 보정 | 자동 색상 보정 | ✅ 가이드 + 자동 실행 구현 완료 |
+| 색상 / 보정 | 밝기/대비 조정 | ✅ 가이드 + 자동 실행 구현 완료 |
+| 레이어 정리 | 레이어 그룹으로 정리 | ✅ 가이드 + 자동 실행 구현 완료 |
+| 레이어 정리 | 레이어 이름 정리 | ✅ 가이드 + 자동 실행 구현 완료 |
 
-"준비 중" 항목은 UI 목록에는 노출되지만 버튼이 비활성화되어 있습니다.
+8개 기능 모두 가이드 모드와 자동 실행 모드가 구현되어 있습니다.
 새 기능을 추가하려면 [기능 추가 방법](#기능-추가-방법)을 참고하세요.
 
 ## 프로젝트 구조
@@ -37,7 +39,14 @@ psg-assist/
 │   ├── batchplay.js           # photoshop.action.batchPlay / core.executeAsModal 래퍼
 │   ├── featureRegistry.js     # 카테고리·기능 목록 (단일 원천)
 │   └── features/
-│       └── removeBackground.js  # "배경 제거" 가이드 + 자동 실행 구현
+│       ├── removeBackground.js    # 배경 제거
+│       ├── duplicateObject.js      # 오브젝트 복제
+│       ├── textShadow.js            # 텍스트에 그림자 넣기
+│       ├── textOutline.js            # 텍스트에 외곽선 넣기
+│       ├── autoTone.js                # 자동 색상 보정
+│       ├── brightnessContrast.js       # 밝기/대비 조정
+│       ├── groupLayers.js               # 레이어 그룹으로 정리
+│       └── renameLayers.js               # 레이어 이름 정리
 ├── assets/
 │   └── guides/                # 가이드 단계 스크린샷을 넣는 자리 (선택)
 ├── package.json
@@ -84,6 +93,20 @@ psg-assist/
 > ⚠️ 위와 동일하게 `dropShadow` 디스크립터도 커뮤니티에 알려진 값 기반의 뼈대이며,
 > RGBColor의 `grain` 키는 오타가 아니라 green 채널이 Action Manager에서 흔히 이렇게
 > 나타나는 잘 알려진 특이사항입니다. 실제 버전에서 검증하세요.
+
+## 나머지 기능 동작 방식 요약
+
+| 기능 | 파일 | 자동 실행이 하는 일 |
+| --- | --- | --- |
+| 오브젝트 복제 | `js/features/duplicateObject.js` | 활성 레이어를 `duplicate`로 복제하고 30px, 30px 오프셋 이동 |
+| 텍스트에 외곽선 넣기 | `js/features/textOutline.js` | 활성 레이어에 기본값(검정 2px, 바깥쪽)의 획(Stroke, `frameFX`) 레이어 스타일 적용 |
+| 자동 색상 보정 | `js/features/autoTone.js` | `_obj: "autoTone"` 한 번 호출 ([이미지 > 자동 톤]과 동일) |
+| 밝기/대비 조정 | `js/features/brightnessContrast.js` | `_obj: "brightnessEvent"`로 밝기 +10, 대비 +10 적용 |
+| 레이어 그룹으로 정리 | `js/features/groupLayers.js` | 선택된 레이어(들)를 `make layerSection`으로 그룹화 (Ctrl/Cmd+G와 동일) |
+| 레이어 이름 정리 | `js/features/renameLayers.js` | batchPlay 대신 UXP DOM API(`document.layers`, `layer.name`)로 최상위 레이어 이름을 "레이어 01", "레이어 02" ... 순으로 재설정 |
+
+배경 제거/텍스트 그림자와 마찬가지로 위 batchPlay 디스크립터들도 커뮤니티에 알려진
+값을 바탕으로 한 뼈대 코드이므로, 실제 대상 Photoshop 버전에서 검증이 필요합니다.
 
 ## 기능 추가 방법
 
@@ -146,7 +169,7 @@ npm run validate-manifest
 
 ## 다음 단계 (제안)
 
-- 배경 제거를 Photoshop에서 실제 검증 (레이어 종류, 문서 상태별 예외 처리 보강)
-- 텍스트 그림자, 자동 색상 보정 등 나머지 기능 구현
+- 8개 기능 모두 실제 Photoshop에서 검증 (레이어 종류, 문서 상태별 예외 처리 보강)
 - `assets/guides/`에 실제 스크린샷 추가
+- 카테고리/기능을 더 추가하고 싶다면 [기능 추가 방법](#기능-추가-방법) 참고
 - 필요 시 ESLint/Prettier, TypeScript, 번들러(esbuild 등) 도입

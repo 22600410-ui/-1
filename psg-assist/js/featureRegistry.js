@@ -6,6 +6,12 @@
 
 const removeBackground = require("./features/removeBackground.js");
 const textShadow = require("./features/textShadow.js");
+const duplicateObject = require("./features/duplicateObject.js");
+const textOutline = require("./features/textOutline.js");
+const autoTone = require("./features/autoTone.js");
+const brightnessContrast = require("./features/brightnessContrast.js");
+const groupLayers = require("./features/groupLayers.js");
+const renameLayers = require("./features/renameLayers.js");
 
 const CATEGORIES = [
   {
@@ -13,7 +19,7 @@ const CATEGORIES = [
     label: "배경 / 오브젝트",
     features: [
       { id: "remove-background", label: removeBackground.meta.label, impl: removeBackground },
-      { id: "duplicate-object", label: "오브젝트 복제", impl: null }
+      { id: "duplicate-object", label: duplicateObject.meta.label, impl: duplicateObject }
     ]
   },
   {
@@ -21,23 +27,23 @@ const CATEGORIES = [
     label: "텍스트",
     features: [
       { id: "text-shadow", label: textShadow.meta.label, impl: textShadow },
-      { id: "text-outline", label: "텍스트에 외곽선 넣기", impl: null }
+      { id: "text-outline", label: textOutline.meta.label, impl: textOutline }
     ]
   },
   {
     id: "color",
     label: "색상 / 보정",
     features: [
-      { id: "auto-tone", label: "자동 색상 보정", impl: null },
-      { id: "brightness-contrast", label: "밝기/대비 조정", impl: null }
+      { id: "auto-tone", label: autoTone.meta.label, impl: autoTone },
+      { id: "brightness-contrast", label: brightnessContrast.meta.label, impl: brightnessContrast }
     ]
   },
   {
     id: "layer",
     label: "레이어 정리",
     features: [
-      { id: "group-layers", label: "레이어 그룹으로 정리", impl: null },
-      { id: "rename-layers", label: "레이어 이름 정리", impl: null }
+      { id: "group-layers", label: groupLayers.meta.label, impl: groupLayers },
+      { id: "rename-layers", label: renameLayers.meta.label, impl: renameLayers }
     ]
   }
 ];
