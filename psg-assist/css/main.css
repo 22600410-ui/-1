@@ -1,0 +1,273 @@
+/*
+ * PSG Assist panel styles.
+ * Adobe Spectrum의 "darkest" 테마 톤을 참고해 포토샵 패널과 어울리도록 맞춘 값입니다.
+ * 실제 Spectrum CSS 변수를 쓰려면 spectrum-web-components 등을 추가로 연결하세요.
+ */
+
+:root {
+  --psg-bg: #1e1e1e;
+  --psg-panel-bg: #2c2c2c;
+  --psg-surface: #323232;
+  --psg-surface-hover: #3d3d3d;
+  --psg-border: #464646;
+  --psg-text: #e6e6e6;
+  --psg-text-secondary: #b3b3b3;
+  --psg-text-disabled: #6e6e6e;
+  --psg-accent: #2680eb;
+  --psg-accent-hover: #1473e6;
+  --psg-accent-down: #0d66d0;
+  --psg-danger: #e34850;
+  --psg-success: #33ab84;
+  --psg-radius-sm: 4px;
+  --psg-radius-md: 6px;
+  --psg-font-family: "Adobe Clean", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  --psg-font-size-sm: 11px;
+  --psg-font-size-md: 12px;
+  --psg-font-size-lg: 14px;
+  --psg-spacing-xs: 4px;
+  --psg-spacing-sm: 8px;
+  --psg-spacing-md: 12px;
+  --psg-spacing-lg: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--psg-bg);
+  color: var(--psg-text);
+  font-family: var(--psg-font-family);
+  font-size: var(--psg-font-size-md);
+}
+
+.psg-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--psg-spacing-md);
+  padding: var(--psg-spacing-md);
+  min-height: 100vh;
+}
+
+.psg-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.psg-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--psg-text);
+}
+
+.psg-subtitle {
+  margin: 0;
+  font-size: var(--psg-font-size-sm);
+  color: var(--psg-text-secondary);
+}
+
+.psg-search {
+  display: flex;
+}
+
+.psg-input {
+  flex: 1;
+  background: var(--psg-surface);
+  border: 1px solid var(--psg-border);
+  border-radius: var(--psg-radius-sm);
+  color: var(--psg-text);
+  padding: 6px var(--psg-spacing-sm);
+  font-size: var(--psg-font-size-md);
+  font-family: inherit;
+}
+
+.psg-input:focus {
+  outline: none;
+  border-color: var(--psg-accent);
+}
+
+.psg-section-title {
+  margin: 0;
+  font-size: var(--psg-font-size-lg);
+  font-weight: 600;
+  color: var(--psg-text);
+}
+
+.psg-category-list,
+.psg-feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--psg-spacing-sm);
+}
+
+.psg-btn {
+  appearance: none;
+  border: 1px solid var(--psg-border);
+  border-radius: var(--psg-radius-sm);
+  background: var(--psg-surface);
+  color: var(--psg-text);
+  padding: 8px var(--psg-spacing-md);
+  font-size: var(--psg-font-size-md);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.1s ease, border-color 0.1s ease;
+}
+
+.psg-btn:hover:not(:disabled) {
+  background: var(--psg-surface-hover);
+  border-color: #5a5a5a;
+}
+
+.psg-btn:focus-visible {
+  outline: 2px solid var(--psg-accent);
+  outline-offset: 1px;
+}
+
+.psg-btn:disabled {
+  color: var(--psg-text-disabled);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.psg-btn--category {
+  font-weight: 600;
+}
+
+.psg-btn--back {
+  align-self: flex-start;
+  border: none;
+  background: transparent;
+  color: var(--psg-text-secondary);
+  padding: 4px 0;
+}
+
+.psg-btn--back:hover {
+  background: transparent;
+  color: var(--psg-text);
+}
+
+.psg-actions {
+  display: flex;
+  gap: var(--psg-spacing-sm);
+  margin-top: var(--psg-spacing-sm);
+}
+
+.psg-btn--primary {
+  flex: 1;
+  background: var(--psg-accent);
+  border-color: var(--psg-accent);
+  color: #ffffff;
+  font-weight: 600;
+  text-align: center;
+}
+
+.psg-btn--primary:hover:not(:disabled) {
+  background: var(--psg-accent-hover);
+  border-color: var(--psg-accent-hover);
+}
+
+.psg-btn--primary:active:not(:disabled) {
+  background: var(--psg-accent-down);
+}
+
+.psg-btn--secondary {
+  flex: 1;
+  text-align: center;
+  color: var(--psg-accent);
+  border-color: var(--psg-accent);
+  background: transparent;
+}
+
+.psg-btn--secondary:hover:not(:disabled) {
+  background: rgba(38, 128, 235, 0.12);
+}
+
+.psg-feature-detail,
+.psg-guide-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--psg-spacing-sm);
+  padding: var(--psg-spacing-md);
+  background: var(--psg-panel-bg);
+  border: 1px solid var(--psg-border);
+  border-radius: var(--psg-radius-md);
+}
+
+.psg-summary {
+  margin: 0;
+  color: var(--psg-text-secondary);
+}
+
+.psg-guide-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--psg-spacing-md);
+  counter-reset: psg-step;
+}
+
+.psg-guide-step {
+  position: relative;
+  padding-left: 28px;
+  counter-increment: psg-step;
+}
+
+.psg-guide-step::before {
+  content: counter(psg-step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--psg-accent);
+  color: #ffffff;
+  font-size: var(--psg-font-size-sm);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.psg-guide-step strong {
+  display: block;
+  font-size: var(--psg-font-size-md);
+  color: var(--psg-text);
+  margin-bottom: 2px;
+}
+
+.psg-guide-step p {
+  margin: 0;
+  color: var(--psg-text-secondary);
+  line-height: 1.5;
+}
+
+.psg-guide-step img {
+  display: block;
+  max-width: 100%;
+  border-radius: var(--psg-radius-sm);
+  border: 1px solid var(--psg-border);
+  margin-top: var(--psg-spacing-xs);
+}
+
+.psg-empty {
+  color: var(--psg-text-secondary);
+  font-size: var(--psg-font-size-sm);
+}
+
+.psg-status {
+  margin-top: auto;
+  min-height: 16px;
+  font-size: var(--psg-font-size-sm);
+  color: var(--psg-text-secondary);
+}
+
+.psg-status.is-error {
+  color: var(--psg-danger);
+}

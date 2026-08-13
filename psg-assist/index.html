@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <div id="panel-psgAssistPanel" class="psg-panel">
+      <header class="psg-header">
+        <h1 class="psg-title">PSG Assist</h1>
+        <p class="psg-subtitle">하고 싶은 작업을 고르면 가이드하거나 자동으로 실행해 드려요</p>
+      </header>
+
+      <section class="psg-search">
+        <input
+          id="search-input"
+          type="text"
+          class="psg-input"
+          placeholder="예: 배경 제거, 그림자 넣기..."
+          aria-label="기능 검색"
+        />
+      </section>
+
+      <nav id="category-list" class="psg-category-list" aria-label="카테고리 목록"></nav>
+
+      <section id="feature-list" class="psg-feature-list" hidden></section>
+
+      <section id="feature-detail" class="psg-feature-detail" hidden></section>
+
+      <section id="guide-view" class="psg-guide-view" hidden></section>
+
+      <footer id="status-bar" class="psg-status" aria-live="polite"></footer>
+    </div>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>
